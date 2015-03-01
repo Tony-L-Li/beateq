@@ -1,0 +1,31 @@
+html, body {
+  height: 100%;
+}
+input:focus, select:focus, textarea:focus, button:focus, span:focus, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+  border-color: #ccc;
+  box-shadow: none;
+  outline: 0 none;
+}
+i {
+  cursor: pointer;
+}
+.logo {
+  height: 30px;
+  margin-top: 14px;
+}
+.header {
+  border-top: solid #FF851B 4px;
+  border-bottom: solid #ccc 1px;
+  background-color: #fff;
+  height: 62px;
+}
+.mr-md {
+  margin: 12px;
+}
+.mr-lg {
+  margin: 30px;
+}
+.create-button {
+  margin-left: 0px;
+  margin-right: 0px;
+}

@@ -1,7 +1,4 @@
 module.exports = function (grunt) {
-
-  grunt.registerTask('speak', function () {
-    console.log("hi");
-  })
-
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.initConfig({});
 };

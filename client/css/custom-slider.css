@@ -1,0 +1,26 @@
+.ui-slider {
+  position: relative;
+  background-color: #555;
+  border: 1px solid #222;
+  border-radius: 2px;
+}
+.ui-slider-horizontal {
+  height: 6px;
+}
+.ui-slider-range {
+  position: absolute;
+  background-color: #FF851B;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+}
+.ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  width: 6px;
+  height: 8px;
+  background-color: #333;
+}
+.ui-slider-horizontal .ui-slider-handle {
+  top:-2px;
+}

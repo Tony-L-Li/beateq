@@ -1,0 +1,158 @@
+/* colors
+  navy : #001F3F
+  blue : #0074D9
+  aqua : #7FDBFF
+  teal : #39CCCC
+  olive : #3D9970
+  green : #2ECC40
+  lime : #01FF70
+  yellow : #FFDC00
+  orange : #FF851B
+  red : #FF4136
+  fuchsia : #F012BE
+  purple : #B10DC9
+  maroon : #85144B
+  white : #fff
+  silver : #ddd
+  gray : #aaa
+  black : #111
+  */
+
+p {
+  margin: 0;
+  padding: 0;
+}
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.main {
+  position: absolute;
+  top: 62px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #FFF;
+}
+.eq-left, .eq-right {
+  background-color: #FF851B;
+  height: 100%;
+  width: 100px;
+}
+.eq-left {
+  float: left;
+}
+.eq-right {
+  float: right;
+}
+.search {
+  box-shadow: inset 3px -1px 6px 0 rgba(0, 0, 0, 0.3);
+  margin-left: 515px;
+  margin-right: 100px;
+  height: 100%;
+  background-color: #fff;
+}
+.player-container {
+  position: relative;
+  float: left;
+  height: 100%;
+  width: 415px;
+  background-color: #ffe1c7;
+}
+.player {
+  width: 400px;
+  float: left;
+}
+.player-space {
+  box-shadow: inset -3px -1px 6px 0 rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  width: 15px;
+  height: 100%;
+  float: left;
+}
+.controls {
+  position: absolute;
+  border-top: solid #FF851B 4px;
+  border-bottom:solid #FF851B 1px;
+  top:40px;
+  width: 400px;
+  height: 120px;
+  background-color: #fff;
+}
+.playing-info {
+  position: relative;
+  margin: 20px 0px 0px 20px;
+  height: 50px;
+}
+.album-art {
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+.playing-des {
+  float: left;
+  margin-left: 20px;
+}
+.current-title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.current-artist {
+  font-size:0.8em;
+  color: #666;
+}
+.duration-slider {
+  margin-top: 6px;
+  width: 200px;
+  margin-left: 10px;
+}
+.playing-controls {
+  position: absolute;
+  bottom: 0;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.playing-controls i {
+  height: 20px;
+  vertical-align: middle;
+}
+.controls-main i {
+  font-size: 1.2em;
+}
+.volume {
+  margin-left: 10px;
+  font-size: 1.2em;
+}
+.repeat {
+  font-size: 1em;
+}
+i.backward, i.forward {
+  color: #444;
+}
+.play {
+  margin-left: 3px;
+}
+.time {
+  font-size: 0.9em;
+  margin-left: 10px;
+  float: left;
+}
+.pull-left {
+  float: left;
+}
+.search-box{
+  width:400px;
+  margin-left:60px;
+  padding-top:30px;
+}
+@media screen and (max-width: 900px) {
+  .eq-left, .eq-right {
+    display: none;
+  }
+  .search {
+    margin-left: 400px;
+    margin-right: 0px;
+  }
+}
