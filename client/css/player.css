@@ -147,6 +147,20 @@ i.backward, i.forward {
   margin-left:60px;
   padding-top:30px;
 }
+.playlist{
+  position:absolute;
+  height:100%;
+  width:100%;
+  padding-right:15px;
+}
+.playlist-scroll{
+  width:100%;
+  margin-top:180px;
+}
+.song-item{
+  padding-left:20px;
+  height:80px;
+}
 @media screen and (max-width: 900px) {
   .eq-left, .eq-right {
     display: none;
