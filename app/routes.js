@@ -1,5 +1,7 @@
 // grab the nerd model we just created
 var Nerd = require('./models/nerd');
+var grooveshark = require('grooveshark-js');
+var gs = grooveshark('plists_tony2', '62a5ce26c3947471f4573577407b1634');
 
 module.exports = function (app) {
 
@@ -31,4 +33,12 @@ module.exports = function (app) {
     res.sendfile('./client/views/main.html'); // load our public/index.html file
   });
 
+  app.get('/test/getSong', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    gs.makeRequest({
+      method: 'getCountry',
+    }, function (error, response, data) {
+      res.end(JSON.stringify(data));
+    });
+  });
 };

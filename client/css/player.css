@@ -48,6 +48,7 @@ p {
   float: right;
 }
 .search {
+  position:relative;
   box-shadow: inset 3px -1px 6px 0 rgba(0, 0, 0, 0.3);
   margin-left: 515px;
   margin-right: 100px;
@@ -168,7 +169,6 @@ i.backward, i.forward {
   height:60px;
   width:360px;
   background-color: #fff;
-  border-radius: 4px;
   margin-left:20px;
 }
 .song-item .album-art{
@@ -202,19 +202,23 @@ i.backward, i.forward {
   border-bottom:1px solid #888
 }
 .divider p{
-  font-size:2em;
-  color:#555;
+  font-size:1.7em;
+  color:#444;
+  font-weight: bold;
 }
 .search-container{
   margin-left:20px;
   margin-top:20px;
+  width:100%;
+  overflow-y:hidden;
+  overflow-x:auto;
 }
 .search-song-item{
   float:left;
   margin-right:10px;
   width:120px;
   height:160px;
-  background-color:#555;
+  background-color:#333;
   border-radius:4px;
 }
 .search-song-item .album-art{
@@ -229,6 +233,52 @@ i.backward, i.forward {
 .search-song-item .des .artist{
   font-size:0.8em;
   color:#ddd;
+}
+.divider-playlist{
+  position: absolute;
+  bottom:0;
+  margin-bottom:150px;
+  right:10px;
+  left:20px;
+  margin-right:10px;
+}
+.container-playlist{
+  position: absolute;
+  bottom:0;
+  margin-bottom:30px;
+  height: 100px;
+}
+.search-playlist-item{
+  float:left;
+  margin-right:20px;
+}
+.search-playlist-item .album-art{
+  width:100px;
+  height:100px;
+}
+.search-playlist-item .playlist-info{
+  float:left;
+  margin-left:10px;
+}
+.playlist-title{
+  margin-top:10px;
+  font-size:1.5em;
+  color:#222;
+  font-weight: bold;
+}
+.playlist-creator{
+  display:inline-block;
+  background-color:#333;
+  color:#eee;
+  padding-left:5px;
+  padding-right:5px;
+  border-left:3px solid #FF851B;
+  margin-left:5px;
+}
+.playlist-listens{
+  margin-left:5px;
+  color:#555;
+  font-weight: bold;
 }
 @media screen and (max-width: 900px) {
   .eq-left, .eq-right {
