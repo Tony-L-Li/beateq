@@ -1,44 +1,94 @@
-// grab the nerd model we just created
-var Nerd = require('./models/nerd');
-var grooveshark = require('grooveshark-js');
-var gs = grooveshark('plists_tony2', '62a5ce26c3947471f4573577407b1634');
-
 module.exports = function (app) {
+  var _ = require('lodash');
+  var EventEmitter = require('events').EventEmitter;
+  var messageBus = new EventEmitter();
+  messageBus.setMaxListeners(500);
 
-  // server routes ===========================================================
-  // handle things like api calls
-  // authentication routes
+  var User = require('./models/user')(app);
+  var Playlist = require('./models/playlist')(app);
+  var PlaylistsToSongs = require('./models/playlists_to_songs')(app);
 
-  // sample api route
-  app.get('/api/nerds', function (req, res) {
-    // use mongoose to get all nerds in the database
-    Nerd.find(function (err, nerds) {
-
-      // if there is an error retrieving, send the error. 
-      // nothing after res.send(err) will execute
-      if (err)
-        res.send(err);
-
-      res.json(nerds); // return all nerds in JSON format
+  app.post('/p/:pId/addsong', function (req, res) {
+    PlaylistsToSongs.max('songOrder', {
+      where: {
+        playlistId: req.params.pId
+      }
+    }).then(function (max) {
+      PlaylistsToSongs.create({
+        playlistId: req.params.pId,
+        songOrder: (isNaN(max) ? 1 : max + 1),
+        songId: req.body.songId
+      }).then(function (newPlaylist) {
+        messageBus.emit(req.params.pId, ['add', req.body.songId]);
+        res.sendStatus(200).end();
+      });
     });
   });
 
-  // route to handle creating goes here (app.post)
-  // route to handle delete goes here (app.delete)
+  app.post('/p/:pId/deletesong', function (req, res) {
+    PlaylistsToSongs.destroy({
+      where: {
+        playlistId: req.params.pId,
+        songId: req.body.songId
+      }
+    }).then(function () {
+      messageBus.emit(req.params.pId, ['destroy', req.body.songId]);
+      res.sendStatus(200).end();
+    }).catch(function (error) {
+      res.sendStatus(400).end();
+    });
+  });
+
+  app.post('*create', function (req, res) {
+    var createPlaylist = function () {
+      var curRand = Math.random().toString(36).substr(2, 5);
+      Playlist.count({
+        where: {
+          id: curRand
+        }
+      }).then(function (count) {
+        if (count === 0) {
+          Playlist.create({
+            id: curRand,
+            name: req.body.name
+          });
+        } else {
+          createPlaylist();
+        }
+      })
+    };
+
+    createPlaylist();
+  });
+
+
+  app.get('/p/:pId/subscribe', function (req, res) {
+    var addMessageListener = function (res) {
+      messageBus.once(req.params.pId, function (data) {
+        res.json(data);
+      })
+    };
+    addMessageListener(res);
+  });
+
+  app.get('/p/:pId/songs', function (req, res) {
+    PlaylistsToSongs.findAll({
+      where: {
+        playlistId: req.params.pId
+      },
+      order: 'songId'
+    }).then(function (songs) {
+      res.json(_.map(songs, function (song) {
+        return song.dataValues;
+      }));
+    });
+  });
+
   app.get('/', function (req, res) {
-    res.sendfile('./client/index.html'); // load our public/index.html file
+    res.sendfile('./client/index.html');
   });
 
   app.get('/p/*', function (req, res) {
-    res.sendfile('./client/views/main.html'); // load our public/index.html file
-  });
-
-  app.get('/test/getSong', function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    gs.makeRequest({
-      method: 'getCountry',
-    }, function (error, response, data) {
-      res.end(JSON.stringify(data));
-    });
+    res.sendfile('./client/views/main.html');
   });
 };
