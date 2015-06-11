@@ -51,6 +51,7 @@ module.exports = function (app) {
   });
 
   app.post('*create', function (req, res) {
+    console.log(req.body.name);
     var createPlaylist = function () {
       var curRand = Math.random().toString(36).substr(2, 5);
       Playlist.count({

@@ -6,7 +6,7 @@ $(function () {
         type: 'POST',
         url: window.location.href + '/create',
         data: {
-          name: $('.name-input').val()
+          name: $('.name-input').val().replace(/\s+/g, '')
         },
         dataType: 'json',
         success: function (data) {
