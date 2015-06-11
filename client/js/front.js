@@ -1,7 +1,22 @@
 $(function () {
   $('.create-button').click(function () {
-    $(".name-input").animate({
-      width: 'toggle'
-    }, 200).focus();
+    if ($('.name-input').css('display') === 'inline-block' && $('.name-input').val().length != 0) {
+      console.log(1);
+      $.ajax({
+        type: 'POST',
+        url: window.location.href + '/create',
+        data: {
+          name: $('.name-input').val()
+        },
+        dataType: 'json',
+        success: function (data) {
+          window.location.href = window.location.href + 'p/' + data.url
+        }
+      });
+    } else {
+      $(".name-input").animate({
+        width: 'toggle'
+      }, 200).focus();
+    }
   });
 });

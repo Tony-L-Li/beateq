@@ -27,8 +27,6 @@ $(function () {
       $('.playing-info > .playing-des > .current-title').text(songInfo.find('p:eq(0)')[0].innerText);
       $('.playing-info > .playing-des > .current-artist').text(songInfo.find('p:eq(1)')[0].innerText);
       curSong.play();
-
-      console.log(curSong);
     });
   }
 
@@ -42,8 +40,21 @@ $(function () {
   }
 
   function refreshSongResults(tracks) {
-    _(tracks).forEach(function (n) {
-      /*
+    $('.search-container').fadeOut(function () {
+      $('.search-container').text('');
+      _(tracks).forEach(function (n) {
+        $('.search-container').append('<div class="search-song-item" id="' + n.id + '">\
+            <img src="' + (n.artwork_url || '/../img/art_default.jpg') + '" alt="album art" class="album-art">\
+            <div class="des">\
+              <p class="title">' + n.title + '</p>\
+              <p class="artist">' + n.user.username + '</p>\
+            </div>\
+          </div>');
+      }).value();
+      $('.search-container').fadeIn();
+    });
+
+    /*
       $('.search-container').append(
         $('<div>', {
           id: n.id,
@@ -59,14 +70,6 @@ $(function () {
             append: $('<p>')
           }))
         })*/
-      $('.search-container').append('<div class="search-song-item" id="' + n.id + '">\
-            <img src="' + (n.artwork_url || '/../img/art_default.jpg') + '" alt="album art" class="album-art">\
-            <div class="des">\
-              <p class="title">' + n.title + '</p>\
-              <p class="artist">' + n.user.username + '</p>\
-            </div>\
-          </div>');
-    }).value();
   }
 
   durationSlider.slider({
@@ -248,6 +251,62 @@ $(function () {
       //starts longpolling after songs are loaded
       subscribe();
     }
+  });
+
+  $.ajax({
+    method: 'GET',
+    url: window.location.href + '/name',
+    success: function (data) {
+      $('.header > h1').text(data);
+    }
+  });
+
+  $.ajax({
+    method: 'GET',
+    url: window.location.href + '/playlists',
+    success: function (data) {
+      var addPlaylists = function (playlists) {
+        if (playlists.length === 0) return;
+        var playlistName = '';
+        var url = playlists[0].id;
+
+        $.ajax({
+          method: 'GET',
+          url: 'http://localhost:8080' + '/p/' + playlists[0].id + '/name',
+          success: function (data) {
+            playlistName = data;
+            $.ajax({
+              method: 'GET',
+              url: 'http://localhost:8080' + '/p/' + playlists[0].id + '/songs',
+              success: function (data) {
+                if (data.length === 0) return;
+                SC.get('/tracks/' + data[0].songId, function (track) {
+                  $('.container-playlist').append('<div class="search-playlist-item" id=' + url + '>\
+                      <img src="' + (track.artwork_url || '/../img/art_default.jpg') + '" alt="album art" class="album-art">\
+                      <div class="playlist-info">\
+                        <p class="playlist-title">' + playlistName + '</p>\
+                        <p class="playlist-creator">' + track.genre + '</p>\
+                        <p class="playlist-listens">0 Listens</p>\
+                      </div>\
+                    </div>');
+                  addPlaylists(playlists.slice(1));
+                });
+              }
+            });
+
+          }
+        });
+      };
+
+      addPlaylists(data);
+    }
+  });
+
+  SC.get('/tracks', {
+    genres: 'pop',
+    limit: 50
+  }, function (tracks) {
+    refreshSongResults(tracks);
   });
 
   /*

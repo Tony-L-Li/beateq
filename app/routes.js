@@ -11,6 +11,7 @@ module.exports = function (app) {
   app.post('/p/:pId/addsong', function (req, res) {
     PlaylistsToSongs.findAndCountAll({
       where: {
+        playlistId: req.params.pId,
         songId: req.body.songId
       }
     }).then(function (result) {
@@ -33,8 +34,6 @@ module.exports = function (app) {
         res.sendStatus(400).end();
       }
     });
-
-
   });
 
   app.post('/p/:pId/deletesong', function (req, res) {
@@ -64,6 +63,9 @@ module.exports = function (app) {
             id: curRand,
             name: req.body.name
           });
+          res.json({
+            url: curRand
+          });
         } else {
           createPlaylist();
         }
@@ -82,6 +84,16 @@ module.exports = function (app) {
     addMessageListener(res);
   });
 
+  app.get('/p/:pId/name', function (req, res) {
+    Playlist.findAll({
+      where: {
+        id: req.params.pId
+      }
+    }).then(function (playlists) {
+      res.json(playlists[0].dataValues.name);;
+    });
+  });
+
   app.get('/p/:pId/songs', function (req, res) {
     PlaylistsToSongs.findAll({
       where: {
@@ -93,6 +105,16 @@ module.exports = function (app) {
         return song.dataValues;
       }));
     });
+  });
+
+  app.get('*playlists', function (req, res) {
+    Playlist.findAll({
+      limit: 8
+    }).then(function (playlists) {
+      res.json(_.map(playlists, function (playlist) {
+        return playlist.dataValues;
+      }));
+    })
   });
 
   app.get('/', function (req, res) {

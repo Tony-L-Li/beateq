@@ -36,6 +36,15 @@ p {
   width: 100%;
   background-color: #FFF;
 }
+.header h1{
+  position: absolute;
+  left: 50%;
+  width:500px;
+  text-align: center;
+  margin-left: -250px;
+  top: -5px;
+  font-size: 2em;
+}
 .soundcloud {
   float: right;
   margin-top: 8px;
