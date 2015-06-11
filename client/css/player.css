@@ -296,6 +296,8 @@ i.backward, i.forward {
 .search-playlist-item{
   display: inline-block;
   margin-right:20px;
+  width:230px;
+  cursor: pointer;
 }
 .search-playlist-item .album-art{
   width:100px;

@@ -167,6 +167,10 @@ $(function () {
     playSong($(this).attr('id'));
   });
 
+  $('.container-playlist').on('click', '.search-playlist-item', function () {
+    window.location.href = 'http://localhost:8080/p/' + $(this).attr('id');
+  })
+
   function addSongToServer(songId) {
     $.ajax({
       type: 'POST',
@@ -279,7 +283,10 @@ $(function () {
               method: 'GET',
               url: 'http://localhost:8080' + '/p/' + playlists[0].id + '/songs',
               success: function (data) {
-                if (data.length === 0) return;
+                if (data.length === 0) {
+                  addPlaylists(playlists.slice(1));
+                  return;
+                }
                 SC.get('/tracks/' + data[0].songId, function (track) {
                   $('.container-playlist').append('<div class="search-playlist-item" id=' + url + '>\
                       <img src="' + (track.artwork_url || '/../img/art_default.jpg') + '" alt="album art" class="album-art">\
