@@ -9,9 +9,10 @@
   <link rel="stylesheet" type="text/css" href="/../css/main.css"></link>
   <link rel="stylesheet" type="text/css" href="/../css/player.css"></link>
   <link rel="stylesheet" type="text/css" href="/../css/custom-slider.css"></link>
+  <script src="/../libs/lodash/lodash.min.js"></script>
   <script src="/../libs/jquery/dist/jquery.min.js"></script>
   <script src="/../libs/jquery-ui/jquery-ui.min.js"></script>
-  <script src="/../libs/jquery-ui/jquery-ui.min.js"></script>
+  <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
   <script src="/../js/player.js"></script>
 </head>
 
@@ -19,6 +20,9 @@
   <div class="content-wrapper">
     <div class="col-md-12 header">
       <img src="../img/beateq_icon.jpg" class="logo">
+      <a href="http://www.soundcloud.com">
+        <img src="../img/soundcloud.png" class="soundcloud">
+      </a>      
     </div>
 
     <div class="main">
@@ -27,8 +31,9 @@
         <div class="player-space"></div>
         <div class="player">
           <div class="playlist">
-            <div class="playlist-scroll">
-              <div class="song-item active">
+            <div class="playlist-scroll">              
+              <!--
+              <div class="song-item active" id="123456">
                 <img src="/../img/album_art.png" alt="album art" class="album-art">
                 <div class="des">
                   <p class="title">Angels</p>
@@ -36,70 +41,7 @@
                 </div>
                 <i class="fa fa-close close"></i>
               </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
-              <div class="song-item">
-                <img src="/../img/album_art.png" alt="album art" class="album-art">
-                <div class="des">
-                  <p class="title">Angels</p>
-                  <p class="artist">The XX</p>
-                </div>
-                <i class="fa fa-close close"></i>
-              </div>
+              -->                   
             </div>
           </div>
           <div class="controls">
@@ -113,7 +55,7 @@
             <div class="playing-controls">
               <div class="controls-main pull-left">
                 <i class="fa fa-backward backward"></i>
-                <i class="fa fa-play play"></i>
+                <i class="fa fa-pause play"></i>
                 <i class="fa fa-forward forward"></i>
               </div>
               <div class="duration-slider pull-left v-center"></div>
@@ -126,8 +68,8 @@
       <div class="eq-right"></div>
       <div class="search">
         <div class="input-group search-box">
-          <input type="text" class="form-control" placeholder="Search">
-          <span class="input-group-btn">
+          <input type="text" class="form-control search-input" placeholder="Search">
+          <span class="input-group-btn search-button">
             <button class="btn btn-default" type="button">
               <i class="fa fa-search"></i>
             </button>
@@ -137,6 +79,7 @@
           <p>Songs</p>
         </div>
         <div class="search-container">
+          <!--
           <div class="search-song-item">
             <img src="/../img/album_art.png" alt="album art" class="album-art">
             <div class="des">
@@ -144,25 +87,12 @@
               <p class="artist">The XX</p>
             </div>
           </div>
-          <div class="search-song-item">
-            <img src="/../img/album_art.png" alt="album art" class="album-art">
-            <div class="des">
-              <p class="title">Angels</p>
-              <p class="artist">The XX</p>
-            </div>
-          </div>
-          <div class="search-song-item">
-            <img src="/../img/album_art.png" alt="album art" class="album-art">
-            <div class="des">
-              <p class="title">Angels</p>
-              <p class="artist">The XX</p>
-            </div>
-          </div>
+          -->
         </div>
         <div class="divider divider-playlist">
           <p>Playlists</p>
         </div>
-        <div class="search-container container-playlist">
+        <div class="container-playlist">
           <div class="search-playlist-item">
             <img src="/../img/album_art.png" alt="album art" class="album-art">
             <div class="playlist-info">
@@ -180,6 +110,22 @@
             </div>
           </div>
            <div class="search-playlist-item">
+            <img src="/../img/album_art.png" alt="album art" class="album-art">
+            <div class="playlist-info">
+              <p class="playlist-title">Vivian's Playlist</p>
+              <p class="playlist-creator">Vivian</p>
+              <p class="playlist-listens">143 Listens</p>
+            </div>
+          </div>
+          <div class="search-playlist-item">
+            <img src="/../img/album_art.png" alt="album art" class="album-art">
+            <div class="playlist-info">
+              <p class="playlist-title">Vivian's Playlist</p>
+              <p class="playlist-creator">Vivian</p>
+              <p class="playlist-listens">143 Listens</p>
+            </div>
+          </div>
+          <div class="search-playlist-item">
             <img src="/../img/album_art.png" alt="album art" class="album-art">
             <div class="playlist-info">
               <p class="playlist-title">Vivian's Playlist</p>

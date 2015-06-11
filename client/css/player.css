@@ -36,6 +36,10 @@ p {
   width: 100%;
   background-color: #FFF;
 }
+.soundcloud {
+  float: right;
+  margin-top: 8px;
+}
 .eq-left, .eq-right {
   background-color: #333;
   height: 100%;
@@ -98,6 +102,10 @@ p {
   margin-left: 20px;
 }
 .current-title {
+  width: 270px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
   font-weight: bold;
   font-size: 1.1em;
 }
@@ -137,7 +145,9 @@ i.backward, i.forward {
   margin-left: 3px;
 }
 .time {
-  font-size: 0.9em;
+  margin-top: 2px;
+  font-family: Arial, sans-serif;
+  font-size: 0.8em;
   margin-left: 10px;
   float: left;
 }
@@ -164,6 +174,7 @@ i.backward, i.forward {
   overflow:auto;
 }
 .song-item{
+  cursor: pointer;
   margin-top:10px;
   padding:10px;
   height:60px;
@@ -181,6 +192,10 @@ i.backward, i.forward {
   margin-left:10px;
 }
 .song-item .des .title{
+  width: 270px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-size:1.1em;
   font-weight:bold;
 }
@@ -193,7 +208,7 @@ i.backward, i.forward {
   line-height:40px;
 }
 .active{
-  border: 1px solid #FF851B;
+  outline: 1px solid #FF851B;
 }
 .divider{
   margin-top:20px;
@@ -207,15 +222,21 @@ i.backward, i.forward {
   font-weight: bold;
 }
 .search-container{
+  position:absolute;
+  bottom: 190px;
+  top: 120px;
   margin-left:20px;
   margin-top:20px;
-  width:100%;
-  overflow-y:hidden;
-  overflow-x:auto;
+  left:30px;
+  right:20px;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 .search-song-item{
+  cursor: pointer;
   float:left;
-  margin-right:10px;
+  margin-right:25px;
+  margin-bottom:25px;
   width:120px;
   height:160px;
   background-color:#333;
@@ -234,6 +255,14 @@ i.backward, i.forward {
   font-size:0.8em;
   color:#ddd;
 }
+
+.search-song-item .des .title{
+  white-space: nowrap;
+  margin-top: 120px;
+  padding: 0px 5px 0px 5px;
+  overflow-x:hidden;
+  text-overflow: ellipsis;
+}
 .divider-playlist{
   position: absolute;
   bottom:0;
@@ -243,13 +272,20 @@ i.backward, i.forward {
   margin-right:10px;
 }
 .container-playlist{
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-right: 60px;
   position: absolute;
   bottom:0;
-  margin-bottom:30px;
-  height: 100px;
+  right:20px;
+  left:20px;
+  margin-left:20px;
+  margin-bottom:10px;
+  height: 120px;
 }
 .search-playlist-item{
-  float:left;
+  display: inline-block;
   margin-right:20px;
 }
 .search-playlist-item .album-art{
@@ -280,7 +316,7 @@ i.backward, i.forward {
   color:#555;
   font-weight: bold;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1170px) {
   .eq-left, .eq-right {
     display: none;
   }

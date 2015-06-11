@@ -9,20 +9,32 @@ module.exports = function (app) {
   var PlaylistsToSongs = require('./models/playlists_to_songs')(app);
 
   app.post('/p/:pId/addsong', function (req, res) {
-    PlaylistsToSongs.max('songOrder', {
+    PlaylistsToSongs.findAndCountAll({
       where: {
-        playlistId: req.params.pId
-      }
-    }).then(function (max) {
-      PlaylistsToSongs.create({
-        playlistId: req.params.pId,
-        songOrder: (isNaN(max) ? 1 : max + 1),
         songId: req.body.songId
-      }).then(function (newPlaylist) {
-        messageBus.emit(req.params.pId, ['add', req.body.songId]);
-        res.sendStatus(200).end();
-      });
+      }
+    }).then(function (result) {
+      if (result.count === 0) {
+        PlaylistsToSongs.max('songOrder', {
+          where: {
+            playlistId: req.params.pId
+          }
+        }).then(function (max) {
+          PlaylistsToSongs.create({
+            playlistId: req.params.pId,
+            songOrder: (isNaN(max) ? 1 : max + 1),
+            songId: req.body.songId
+          }).then(function (newPlaylist) {
+            messageBus.emit(req.params.pId, ['add', req.body.songId]);
+            res.sendStatus(200).end();
+          });
+        });
+      } else {
+        res.sendStatus(400).end();
+      }
     });
+
+
   });
 
   app.post('/p/:pId/deletesong', function (req, res) {
@@ -61,12 +73,11 @@ module.exports = function (app) {
     createPlaylist();
   });
 
-
   app.get('/p/:pId/subscribe', function (req, res) {
     var addMessageListener = function (res) {
       messageBus.once(req.params.pId, function (data) {
         res.json(data);
-      })
+      });
     };
     addMessageListener(res);
   });
@@ -76,7 +87,7 @@ module.exports = function (app) {
       where: {
         playlistId: req.params.pId
       },
-      order: 'songId'
+      order: 'songOrder'
     }).then(function (songs) {
       res.json(_.map(songs, function (song) {
         return song.dataValues;

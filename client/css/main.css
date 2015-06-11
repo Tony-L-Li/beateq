@@ -1,5 +1,7 @@
 html, body {
   height: 100%;
+  min-height: 560px;
+  min-width: 1170px;
 }
 input:focus, select:focus, textarea:focus, button:focus, span:focus, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
   border-color: #ccc;
