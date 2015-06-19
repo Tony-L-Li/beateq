@@ -1,0 +1,6 @@
+{
+  "name": "beateq",
+  "description": "Playlisting webapp",
+  "repository": "https://github.com/Tony-L-Li/beateq",
+  "keywords": ["node", "express", "beateq"]
+}
