@@ -3,7 +3,16 @@ $(function () {
   var curSongIndex = null;
   var curSong = null;
   var durationSlider = $('.duration-slider');
+  var volumeSlider = $('.volume-slider');
   var isSliding = false;
+  var context;
+
+  try {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    context = new AudioContext();
+  } catch (e) {
+    alert('Web Audio API is not supported in this browser');
+  }
 
   SC.initialize({
     client_id: '7b56e7d11d264d0f34c0358846603a8f'
@@ -27,6 +36,7 @@ $(function () {
       $('.playing-info > .playing-des > .current-title').text(songInfo.find('p:eq(0)')[0].innerText);
       $('.playing-info > .playing-des > .current-artist').text(songInfo.find('p:eq(1)')[0].innerText);
       curSong.play();
+      console.log(curSong._player._html5Audio);
     });
   }
 
@@ -86,6 +96,16 @@ $(function () {
     }
   });
 
+  volumeSlider.slider({
+    range: 'min',
+    value: 100,
+    min: 0,
+    max: 100,
+    slide: function (event, ui) {
+      curSong.setVolume(ui.value / 100.0);
+    }
+  });
+
   setInterval(function () {
     function timeFromMs(num) {
       function twoDigits(num) {
@@ -118,7 +138,7 @@ $(function () {
     }
   });
 
-  $('.forward').click(function () {
+  function moveForward() {
     if (songQueue.length === 0) return;
 
     if (curSongIndex != null) {
@@ -128,6 +148,11 @@ $(function () {
     } else {
       playSong(songQueue[curSongIndex = 0]);
     }
+
+  }
+
+  $('.forward').click(function () {
+    moveForward();
   });
 
   $('.play').click(function () {
@@ -224,6 +249,7 @@ $(function () {
 
     $('.playlist-scroll > .song-item:eq(' + deleteIndex + ')').remove();
     songQueue.splice(deleteIndex, 1);
+    moveForward();
   }
 
   var subscribe = function () {

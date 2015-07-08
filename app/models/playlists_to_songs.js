@@ -4,20 +4,22 @@ module.exports = function (app) {
   var sequelize = app.get('sequelize');
 
   var PlaylistsToSongs = sequelize.define('playlists_to_songs', {
-    playlistId: {
+    playlistid: {
       type: Sequelize.STRING
     },
-    songOrder: {
+    songorder: {
       type: Sequelize.INTEGER
     },
-    songId: {
+    songid: {
       type: Sequelize.INTEGER
     }
   }, {
     freezeTableName: true
   });
 
-  PlaylistsToSongs.sync();
+  PlaylistsToSongs.sync({
+    force: true
+  });
 
   return PlaylistsToSongs;
 };

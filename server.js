@@ -4,9 +4,10 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var Sequelize = require("sequelize");
 
-var sequelize = new Sequelize('beateq_test', 'beateq_test', 'lostcause', {
-  host: 'localhost',
-  dialect: 'mysql',
+var sequelize = new Sequelize('beateq', 'tonyli', 'lostcause', {
+  host: 'db.cg3nqvtpnnm1.us-west-2.rds.amazonaws.com',
+  port: 5432,
+  dialect: 'postgres',
   pool: {
     max: 10,
     min: 0,

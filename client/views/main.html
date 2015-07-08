@@ -3,19 +3,21 @@
 
 <head>
   <title>Beateq</title>
-  <link rel="stylesheet" type="text/css" href="/../libs/normalize.css/normalize.css"></link>
-  <link rel="stylesheet" type="text/css" href="/../libs/bootstrap/dist/css/bootstrap.min.css"></link>
-  <link rel="stylesheet" type="text/css" href="/../libs/components-font-awesome/css/font-awesome.css"></link>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/../css/main.css"></link>
   <link rel="stylesheet" type="text/css" href="/../css/player.css"></link>
-  <link rel="stylesheet" type="text/css" href="/../css/custom-slider.css"></link>
-  <script src="/../libs/lodash/lodash.min.js"></script>
-  <script src="/../libs/jquery/dist/jquery.min.js"></script>
-  <script src="/../libs/jquery-ui/jquery-ui.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-jsmin.js"></script>
   <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
   <script src="/../js/player.js"></script>
   <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="/../css/custom-slider.css"></link>
 </head>
 
 <body>
@@ -61,9 +63,10 @@
                 <i class="fa fa-pause play"></i>
                 <i class="fa fa-forward forward"></i>
               </div>
-              <div class="duration-slider pull-left v-center"></div>
+              <div class="duration-slider pull-left v-center"></div>              
               <p class="time">--.--/--.--</p>
-              <i class="fa fa-volume-down volume"></i>
+              <i class="fa fa-volume-down volume pull-left"></i>
+              <div class="volume-slider pull-left v-center"></div>
             </div>
           </div>
         </div>

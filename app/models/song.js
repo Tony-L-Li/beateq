@@ -9,14 +9,16 @@ module.exports = function (app) {
       autoIncrement: true,
       primaryKey: true
     },
-    songId: {
+    songid: {
       type: Sequelize.INTEGER
     }
   }, {
     freezeTableName: true
   });
 
-  Song.sync();
+  Song.sync({
+    force: true
+  });
 
   return Song;
 };

@@ -124,13 +124,18 @@ p {
 }
 .duration-slider {
   margin-top: 6px;
-  width: 200px;
-  margin-left: 10px;
+  width: 160px;
+  margin-left: 6px;
+}
+.volume-slider {
+  margin-top: 6px;
+  width: 40px;
+  margin-left: 6px;
 }
 .playing-controls {
   position: absolute;
   bottom: 0;
-  margin-left: 20px;
+  margin-left: 18px;
   margin-bottom: 10px;
 }
 .playing-controls i {
@@ -141,7 +146,7 @@ p {
   font-size: 1.2em;
 }
 .volume {
-  margin-left: 10px;
+  margin-left: 6px;
   font-size: 1.2em;
 }
 .repeat {
@@ -157,7 +162,7 @@ i.backward, i.forward {
   margin-top: 2px;
   font-family: Arial, sans-serif;
   font-size: 0.8em;
-  margin-left: 10px;
+  margin-left: 6px;
   float: left;
 }
 .pull-left {

@@ -11,20 +11,20 @@ module.exports = function (app) {
   app.post('/p/:pId/addsong', function (req, res) {
     PlaylistsToSongs.findAndCountAll({
       where: {
-        playlistId: req.params.pId,
-        songId: req.body.songId
+        playlistid: req.params.pId,
+        songid: req.body.songId
       }
     }).then(function (result) {
       if (result.count === 0) {
-        PlaylistsToSongs.max('songOrder', {
+        PlaylistsToSongs.max('songorder', {
           where: {
-            playlistId: req.params.pId
+            playlistid: req.params.pId
           }
         }).then(function (max) {
           PlaylistsToSongs.create({
-            playlistId: req.params.pId,
-            songOrder: (isNaN(max) ? 1 : max + 1),
-            songId: req.body.songId
+            playlistid: req.params.pId,
+            songorder: (isNaN(max) ? 1 : max + 1),
+            songid: req.body.songId
           }).then(function (newPlaylist) {
             messageBus.emit(req.params.pId, ['add', req.body.songId]);
             res.sendStatus(200).end();
@@ -39,8 +39,8 @@ module.exports = function (app) {
   app.post('/p/:pId/deletesong', function (req, res) {
     PlaylistsToSongs.destroy({
       where: {
-        playlistId: req.params.pId,
-        songId: req.body.songId
+        playlistid: req.params.pId,
+        songid: req.body.songId
       }
     }).then(function () {
       messageBus.emit(req.params.pId, ['destroy', req.body.songId]);
@@ -98,7 +98,7 @@ module.exports = function (app) {
   app.get('/p/:pId/songs', function (req, res) {
     PlaylistsToSongs.findAll({
       where: {
-        playlistId: req.params.pId
+        playlistid: req.params.pId
       },
       order: 'songOrder'
     }).then(function (songs) {

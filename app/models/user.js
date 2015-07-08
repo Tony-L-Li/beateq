@@ -9,14 +9,16 @@ module.exports = function (app) {
       autoIncrement: true,
       primaryKey: true
     },
-    userName: {
+    username: {
       type: Sequelize.STRING
     }
   }, {
     freezeTableName: true
   });
 
-  User.sync();
+  User.sync({
+    force: true
+  });
 
   return User;
 };
