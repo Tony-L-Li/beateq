@@ -9,10 +9,7 @@ module.exports = function (app) {
       primaryKey: true
     },
     name: {
-      type: Sequelize.STRING,
-      validate: {
-        isAlphanumeric: true
-      }
+      type: Sequelize.STRING
     }
   }, {
     freezeTableName: true
