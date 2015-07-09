@@ -36,7 +36,6 @@ $(function () {
       $('.playing-info > .playing-des > .current-title').text(songInfo.find('p:eq(0)')[0].innerText);
       $('.playing-info > .playing-des > .current-artist').text(songInfo.find('p:eq(1)')[0].innerText);
       curSong.play();
-      console.log(curSong._player._html5Audio);
     });
   }
 
@@ -120,6 +119,11 @@ $(function () {
       var duration = curSong.getDuration();
       var curPos = curSong.getCurrentPosition();
 
+      if (duration != 0 && duration - curPos < 500) {
+        moveForward();
+        return;
+      }
+
       $('.time').text(timeFromMs(curPos) + ' / ' + timeFromMs(duration));
       if (!isSliding) {
         durationSlider.slider('value', curSong.getCurrentPosition() * 100 / curSong.getDuration());
@@ -193,7 +197,7 @@ $(function () {
   });
 
   $('.container-playlist').on('click', '.search-playlist-item', function () {
-    window.location.href = 'http://localhost:8080/p/' + $(this).attr('id');
+    window.location.href = location.protocol + "//" + location.host + '/p/' + $(this).attr('id');
   })
 
   function addSongToServer(songId) {
@@ -274,7 +278,6 @@ $(function () {
     method: 'GET',
     url: window.location.href + '/songs',
     success: function (data) {
-      console.log(data);
       addSongsToClient(_.map(data, function (n) {
         return n.songid;
       }));
@@ -291,7 +294,7 @@ $(function () {
       $('.header > h1').text(data);
     }
   });
-  console.log(window.location.href);
+
   $.ajax({
     method: 'GET',
     url: window.location.href + '/playlists',
@@ -303,12 +306,12 @@ $(function () {
 
         $.ajax({
           method: 'GET',
-          url: 'http://localhost:8080' + '/p/' + playlists[0].id + '/name',
+          url: location.protocol + "//" + location.host + '/p/' + playlists[0].id + '/name',
           success: function (data) {
             playlistName = data;
             $.ajax({
               method: 'GET',
-              url: 'http://localhost:8080' + '/p/' + playlists[0].id + '/songs',
+              url: location.protocol + "//" + location.host + '/p/' + playlists[0].id + '/songs',
               success: function (data) {
                 if (data.length === 0) {
                   addPlaylists(playlists.slice(1));

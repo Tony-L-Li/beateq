@@ -69,7 +69,7 @@ module.exports = function (app) {
         } else {
           createPlaylist();
         }
-      })
+      });
     };
 
     createPlaylist();
@@ -121,10 +121,20 @@ module.exports = function (app) {
   });
 
   app.get('/', function (req, res) {
-    res.sendfile('./client/index.html');
+    res.sendfile('./client/views/index.html');
   });
 
-  app.get('/p/*', function (req, res) {
-    res.sendfile('./client/views/main.html');
+  app.get('/p/:pId', function (req, res) {
+    Playlist.count({
+      where: {
+        id: req.params.pId
+      }
+    }).then(function (count) {
+      if (count === 0) {
+        res.sendfile('./client/views/null_playlist.html');
+      } else {
+        res.sendfile('./client/views/playlist.html');
+      }
+    });
   });
 };

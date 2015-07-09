@@ -332,6 +332,9 @@ i.backward, i.forward {
   color:#555;
   font-weight: bold;
 }
+#flashAudioObject{
+  position: fixed;
+}
 @media screen and (max-width: 1170px) {
   .eq-left, .eq-right {
     display: none;

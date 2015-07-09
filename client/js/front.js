@@ -1,7 +1,6 @@
 $(function () {
   $('.create-button').click(function () {
     if ($('.name-input').css('display') === 'inline-block' && $('.name-input').val().length != 0) {
-      console.log(1);
       $.ajax({
         type: 'POST',
         url: window.location.href + '/create',
