@@ -80,7 +80,7 @@ module.exports = function (app) {
       res.json(data);
     };
 
-    messageBus.on(req.params.pId, listener);
+    messageBus.once(req.params.pId, listener);
 
     req.on('close', function () {
       messageBus.removeListener(req.params.pId, listener);

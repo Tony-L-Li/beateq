@@ -131,7 +131,7 @@ $(function () {
     }
   }, 300);
 
-  $('.backward').click(function () {
+  function moveBackward() {
     if (songQueue.length === 0) return;
 
     if (curSongIndex != null) {
@@ -140,7 +140,7 @@ $(function () {
     } else {
       playSong(songQueue[curSongIndex = 0]);
     }
-  });
+  }
 
   function moveForward() {
     if (songQueue.length === 0) return;
@@ -154,6 +154,10 @@ $(function () {
     }
 
   }
+
+  $('.backward').click(function () {
+    moveBackward();
+  });
 
   $('.forward').click(function () {
     moveForward();
@@ -253,7 +257,13 @@ $(function () {
 
     $('.playlist-scroll > .song-item:eq(' + deleteIndex + ')').remove();
     songQueue.splice(deleteIndex, 1);
-    moveForward();
+    console.log('%d %d', curSongIndex, songQueue.length);
+    if (deleteIndex === curSongIndex) {
+      if (curSongIndex > songQueue.length - 1) {
+        curSongIndex = songQueue.length - 1;
+      }
+      playSong(songQueue[curSongIndex]);
+    }
   }
 
   var subscribe = function () {
