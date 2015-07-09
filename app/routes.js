@@ -51,7 +51,6 @@ module.exports = function (app) {
   });
 
   app.post('*create', function (req, res) {
-    console.log(req.body.name);
     var createPlaylist = function () {
       var curRand = Math.random().toString(36).substr(2, 5);
       Playlist.count({
@@ -77,12 +76,15 @@ module.exports = function (app) {
   });
 
   app.get('/p/:pId/subscribe', function (req, res) {
-    var addMessageListener = function (res) {
-      messageBus.once(req.params.pId, function (data) {
-        res.json(data);
-      });
+    var listener = function (data) {
+      res.json(data);
     };
-    addMessageListener(res);
+
+    messageBus.on(req.params.pId, listener);
+
+    req.on('close', function () {
+      messageBus.removeListener(req.params.pId, listener);
+    });
   });
 
   app.get('/p/:pId/name', function (req, res) {
@@ -100,7 +102,7 @@ module.exports = function (app) {
       where: {
         playlistid: req.params.pId
       },
-      order: 'songOrder'
+      order: 'songorder'
     }).then(function (songs) {
       res.json(_.map(songs, function (song) {
         return song.dataValues;

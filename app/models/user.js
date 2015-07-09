@@ -16,9 +16,7 @@ module.exports = function (app) {
     freezeTableName: true
   });
 
-  User.sync({
-    force: true
-  });
+  User.sync();
 
   return User;
 };

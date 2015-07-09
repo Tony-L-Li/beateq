@@ -17,9 +17,7 @@ module.exports = function (app) {
     freezeTableName: true
   });
 
-  PlaylistsToSongs.sync({
-    force: true
-  });
+  PlaylistsToSongs.sync();
 
   return PlaylistsToSongs;
 };

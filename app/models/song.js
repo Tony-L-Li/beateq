@@ -16,9 +16,7 @@ module.exports = function (app) {
     freezeTableName: true
   });
 
-  Song.sync({
-    force: true
-  });
+  Song.sync();
 
   return Song;
 };

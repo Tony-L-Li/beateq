@@ -274,8 +274,9 @@ $(function () {
     method: 'GET',
     url: window.location.href + '/songs',
     success: function (data) {
+      console.log(data);
       addSongsToClient(_.map(data, function (n) {
-        return n.songId;
+        return n.songid;
       }));
 
       //starts longpolling after songs are loaded
@@ -290,7 +291,7 @@ $(function () {
       $('.header > h1').text(data);
     }
   });
-
+  console.log(window.location.href);
   $.ajax({
     method: 'GET',
     url: window.location.href + '/playlists',
@@ -313,7 +314,7 @@ $(function () {
                   addPlaylists(playlists.slice(1));
                   return;
                 }
-                SC.get('/tracks/' + data[0].songId, function (track) {
+                SC.get('/tracks/' + data[0].songid, function (track) {
                   $('.container-playlist').append('<div class="search-playlist-item" id=' + url + '>\
                       <img src="' + (track.artwork_url || '/../img/art_default.jpg') + '" alt="album art" class="album-art">\
                       <div class="playlist-info">\
@@ -341,14 +342,4 @@ $(function () {
   }, function (tracks) {
     refreshSongResults(tracks);
   });
-
-  /*
-  $('.volume-slider').slider({
-    orientation: 'vertical',
-    range: 'min',
-    value: 37,
-    min: 1,
-    max: 100,
-  });
-*/
 });
